@@ -6,9 +6,6 @@ on:
 jobs:
   gradle-publish:
     runs-on: ubuntu-latest
-#    permissions:
-#      id-token: write
-#      contents: read
     steps:
       - name: Check the calling organization
         if: ${{ github.repository_owner != 'cloudshiftinc' }}
@@ -17,13 +14,13 @@ jobs:
           script: |
             core.setFailed('This reusable workflow can only be used by CloudShift.')
 
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           aws-region: us-west-2
           role-to-assume: ${{ secrets.DEVTOOLS_ROLE_ARN }}
 
       # set fetch-depth to get all history (incl. tags), as tags are used for versioning
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
