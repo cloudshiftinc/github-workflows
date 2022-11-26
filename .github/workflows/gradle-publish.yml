@@ -41,6 +41,7 @@ jobs:
           gradle-home-cache-includes: |
             jdks
             go
+            go-pkg-cache
           gradle-home-cache-excludes: |
             go/cache
           arguments: build check publish --info --stacktrace --no-configuration-cache -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64
