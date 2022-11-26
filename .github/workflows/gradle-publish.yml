@@ -46,5 +46,4 @@ jobs:
 
       # TODO - adjust java installations once we self-provision Corretto JDK 17
       - name: Execute Gradle
-        uses: gradle/gradle-build-action@v2
         run: ./gradlew build check publish --info --stacktrace --no-configuration-cache -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64
