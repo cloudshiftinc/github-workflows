@@ -32,15 +32,19 @@ jobs:
           java-version: 17
           distribution: corretto
 
-      # TODO - adjust java installations once we self-provision Corretto JDK 17
-      - name: Setup and execute Gradle
+      # split apart as workaround for https://github.com/gradle/gradle-build-action/issues/426
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: wrapper
+          gradle-version: current
+          gradle-home-cache-cleanup: true
           gradle-home-cache-includes: |
             jdks
             go
           gradle-home-cache-excludes: |
             go/cache
-            go/pkg
-          arguments: build check publish --info --stacktrace --no-configuration-cache -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64
+
+      # TODO - adjust java installations once we self-provision Corretto JDK 17
+      - name: Execute Gradle
+        uses: gradle/gradle-build-action@v2
+        run: ./gradlew build check publish --info --stacktrace --no-configuration-cache -Porg.gradle.java.installations.auto-detect=false -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64
