@@ -25,10 +25,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set JAVA_HOME
-        id: JAVA_HOME
+      - name: Set JAVA environemnt variables
+        id: java-env-vars
         run: |
           echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
+
+#echo "CUSTOM_JAVA_TOOLCHAINS=$(find ~/.gradle/jdks -type d -depth 1 | paste -s -d ',' -)" >> $GITHUB_ENV
+#-Porg.gradle.java.installations.paths=${{env.CUSTOM_JAVA_TOOLCHAINS}}
+#find ~/.gradle/jdks -type d -depth 1
 
       - name: Setup and execute Gradle
         uses: gradle/gradle-build-action@v2
@@ -41,4 +45,4 @@ jobs:
             go-pkg-cache
           gradle-home-cache-excludes: |
             go/cache
-          arguments: build check publish --info --stacktrace --no-configuration-cache
+          arguments: build check publish --info --stacktrace --no-configuration-cache -Porg.gradle.java.installations.auto-detect=false
