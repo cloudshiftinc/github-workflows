@@ -35,7 +35,7 @@ jobs:
       - name: Set JAVA_HOME
         id: JAVA_HOME
         run: |
-          echo "JAVA_HOME=${{ env.JAVA_HOME_17_X64 }}" >> $GITHUB_ENV
+          echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
 
 # JAVA_HOME_17_X64
 
