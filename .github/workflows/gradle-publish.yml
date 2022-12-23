@@ -25,21 +25,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # TODO - remove this once Gradle can self-provision Corretto JDK 17
-#      - name: Set up JDK 17
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 17
-#          distribution: corretto
-
       - name: Set JAVA_HOME
         id: JAVA_HOME
         run: |
           echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
 
-# JAVA_HOME_17_X64
-
-      # TODO - adjust java installations once we self-provision Corretto JDK 17
       - name: Setup and execute Gradle
         uses: gradle/gradle-build-action@v2
         with:
